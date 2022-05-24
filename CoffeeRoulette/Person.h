@@ -13,6 +13,7 @@ public:
     Person(Person &&source);
     Person &operator=(Person &&source);
 
+    //Setter and getter
     void setPastCoffeesNb(std::vector<int> &&pastCoffeesNb);
     void setParticipate(bool &participate);
     const std::string getFirstName();
@@ -20,7 +21,8 @@ public:
     //const std::vector<int> getPastCoffeesNb();
     const bool getParticipate();
 
-    std::vector<int> m_pastCoffeesNb;
+    //Vector of nb representing the persons already met
+    std::vector<int> m_pastCoffeesNb; 
         
 private:
     std::string m_firstName="";

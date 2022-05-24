@@ -5,7 +5,7 @@
 
 //Constructor, destructor, copy and move constructor and assignement op.
 Person::Person(std::string firstName, std::string lastName)//, std::vector<Person> pastCoffees)
-      : m_firstName(firstName), m_lastName(lastName) {m_pastCoffeesNb.emplace_back(10000000);} //, m_pastCoffees(pastCoffees) {}
+    : m_firstName(firstName), m_lastName(lastName) {m_pastCoffeesNb={};} //, m_pastCoffees(pastCoffees) {}
 Person::~Person(){}
 Person::Person(const Person &source){
     m_firstName=source.m_firstName; 
@@ -34,6 +34,7 @@ Person &Person::operator=(Person &&source){
     m_participate=source.m_participate;
     source.m_pastCoffeesNb.clear();}
 
+//Setter and getter
 void Person::setPastCoffeesNb(std::vector<int> &&pastCoffeesNb){
     m_pastCoffeesNb=std::move(pastCoffeesNb);};
 void Person::setParticipate(bool &participate){

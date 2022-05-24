@@ -6,6 +6,10 @@
 #include <algorithm> 
 #include "Person.h"
 
+const int MaxNbOfPersonsInHistory=10;
+
+//Read names (first and last) and a row of numbers of persons already met (history)
+//This file is optional
 std::vector<Person> readNamesListFile(const std::string namesListFile){
     std::ifstream input(namesListFile);
     std::vector<Person> listOfPersons{};
@@ -25,12 +29,14 @@ std::vector<Person> readNamesListFile(const std::string namesListFile){
             listOfPersons.back().setPastCoffeesNb(std::move(listOfNumbers));
         }
     }
-    else std::cout << "Error opening "<<namesListFile;
+    else std::cout << "Cannot open file: "<<namesListFile<<std::endl;
     return listOfPersons;
 };
 
-std::vector<Person> readAnswersFile(const std::string &answersFile, std::vector<Person> &listOfPersons){
-    std::ifstream input(answersFile);
+//Read names (first and last) and a boolean value, which is true if the person wants to participate
+//This file is obligatory
+std::vector<Person> readParticipantsFile(const std::string &participantsFile, std::vector<Person> &listOfPersons){
+    std::ifstream input(participantsFile);
     std::vector<Person> listOfAnswers{};
     if (input.is_open()){
         std::string line;
@@ -53,10 +59,11 @@ std::vector<Person> readAnswersFile(const std::string &answersFile, std::vector<
                 listOfPersons.emplace_back(std::move(person));}
         }
     }
-    else std::cout << "Error opening "<<answersFile;
+    else std::cout << "Cannot open file: "<<participantsFile<< ", error "<<std::endl;
     return listOfPersons;
 };
 
+//Generates a random number between 1 and max
 int generateRandom(int max){
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 gen(rd()); // seed the generator
@@ -64,8 +71,11 @@ int generateRandom(int max){
     return distr(gen);
 }
 
+//Generates random groups of two (ev. three) persons 
+//The output is a vector with the two persons groups (last group ev. three) on the row
 std::vector<Person> generateGroup(std::vector<Person> &listOfPersons){
     std::vector<Person> listOfPersonByGroup{};
+    //Fill in a vector of participating persons
     std::vector<int> personsParticipatingNb{};
     for (std::size_t i=0; i<listOfPersons.size(); ++i){
        if (listOfPersons.at(i).getParticipate()==true){
@@ -74,65 +84,112 @@ std::vector<Person> generateGroup(std::vector<Person> &listOfPersons){
     }
     std::cout<<personsParticipatingNb.size()<<" persons participating."<<std::endl;
     if (personsParticipatingNb.size()<2) std::cout<<"There is less than two persons participating.";
+    //Loop over the participating persons
+    bool foundOldestMet=false;
     while(personsParticipatingNb.size()>=2){
         //Choose randomly one person in the persons participating
-        std::size_t j=(std::size_t)generateRandom(personsParticipatingNb.size());
+        int j=(int)generateRandom(personsParticipatingNb.size())-1;
         int iFirstPerson= personsParticipatingNb.at(j);
-        std::cout<<"Choosen person nb: "<<personsParticipatingNb.at(j)<<" i "<<iFirstPerson<<std::endl;
+        std::cout<<"Choosen person nb: "<<listOfPersons.at(std::size_t(iFirstPerson)).getFirstName()<<" ("<<iFirstPerson<<")"<<std::endl;
         listOfPersonByGroup.emplace_back(listOfPersons.at(std::size_t(iFirstPerson)));
         personsParticipatingNb.erase(personsParticipatingNb.begin()+j);
-        //Set which persons have not been met yet
+        //From the history, set which persons have not been met yet
         std::vector<int> personsNotMet(personsParticipatingNb);
-        bool oldestMet=false;
+        bool foundOldestMet=false;
         int iOldestMet;
+        std::cout<<"Already met : ";
         for (int iMet:listOfPersons.at(std::size_t(iFirstPerson)).m_pastCoffeesNb){
-            std::cout<<"Already met person nb: "<<iMet<<" ";
+            std::cout <<" "<<listOfPersons.at(std::size_t(iMet)).getFirstName()<<" ("<<iMet<<")"<<", ";
             std::vector<int>::iterator it;
             it = std::find(personsNotMet.begin(),personsNotMet.end(), iMet);
+            //for (auto grr:personsNotMet) std::cout<<grr<<" ";
             if (it != personsNotMet.end()){ 
-                personsNotMet.erase(it);
-                if (oldestMet==false){
-                    oldestMet=true;
-                    iOldestMet=personsNotMet.at(iMet);
+                if (foundOldestMet==false){
+                    foundOldestMet=true;
+                    //std::cout<<"Oldest met "<< *it <<std::endl;
+                    iOldestMet=*it;
                 }
+                personsNotMet.erase(it);
             }
         }
+        std::cout<<std::endl;
         //Choose randonly a person in the persons not met (if not empty)
         int iSecondPerson;
         if (personsNotMet.size()>0){ 
-            std::size_t k;
-            k=(std::size_t)generateRandom(personsNotMet.size());
+            int k=(int)generateRandom(personsNotMet.size())-1;
             iSecondPerson=personsNotMet.at(k);
         }
-        //If all persons met, take the "oldest" met person
+        //If all participating persons already met, take the "oldest" met person
         else {
             iSecondPerson=iOldestMet;}
-        personsParticipatingNb.erase(personsParticipatingNb.begin()+iSecondPerson);
-        std::cout<< listOfPersons.at(std::size_t(iFirstPerson)).getFirstName() << " meets "
-            << listOfPersons.at(std::size_t(iSecondPerson)).getFirstName() <<std::endl;
+        personsParticipatingNb.erase(std::find(personsParticipatingNb.begin(),personsParticipatingNb.end(), iSecondPerson));
+        listOfPersonByGroup.emplace_back(listOfPersons.at(std::size_t(iSecondPerson)));
+        //Update the list of persons (nb) already met
+        listOfPersons.at(std::size_t(iFirstPerson)).m_pastCoffeesNb.emplace_back(iSecondPerson);
+        listOfPersons.at(std::size_t(iSecondPerson)).m_pastCoffeesNb.emplace_back(iFirstPerson);
+        if (personsParticipatingNb.size()==1){
+            std::size_t iLastPerson=(std::size_t)personsParticipatingNb.at(0);
+            listOfPersons.at(std::size_t(iFirstPerson)).m_pastCoffeesNb.emplace_back(iLastPerson);
+            listOfPersons.at(std::size_t(iSecondPerson)).m_pastCoffeesNb.emplace_back(iLastPerson);
+            listOfPersons.at(std::size_t(iLastPerson)).m_pastCoffeesNb.emplace_back(iFirstPerson);
+            listOfPersons.at(std::size_t(iLastPerson)).m_pastCoffeesNb.emplace_back(iSecondPerson);
+            listOfPersonByGroup.emplace_back(listOfPersons.at(iLastPerson));
+            std::cout<< listOfPersons.at(std::size_t(iFirstPerson)).getFirstName() << " meets "
+            << listOfPersons.at(std::size_t(iSecondPerson)).getFirstName()<< " and " 
+                << listOfPersons.at(iLastPerson).getFirstName()<<std::endl;}
+        else std::cout<< listOfPersons.at(std::size_t(iFirstPerson)).getFirstName() << " meets "
+            << listOfPersons.at(std::size_t(iSecondPerson)).getFirstName()<< std::endl;
     }
 return listOfPersonByGroup;};
+
+//Write names (first and last) and a row of numbers of persons already met (history)
+void writeNamesListFile(const std::string namesListFile, std::vector<Person> &listOfPersons){
+    std::ofstream output(namesListFile);
+    if (output.is_open()){
+        for (auto &person:listOfPersons){
+            output<< person.getFirstName()<<" ";
+            output<< person.getLastName()<<" ";
+            while (person.m_pastCoffeesNb.size()>MaxNbOfPersonsInHistory) person.m_pastCoffeesNb.erase(person.m_pastCoffeesNb.begin());
+            for(int &i:person.m_pastCoffeesNb) output<<i<<" ";
+            output<<std::endl;
+        }
+    }
+    else std::cout << "Error opening "<<namesListFile;
+};
+
+//Write the groups of persons
+void writeOutputFile(const std::string &outputFile, std::vector<Person> &listOfPersonByGroup){
+    std::ofstream output(outputFile);
+    if (output.is_open()){
+        int i=1;
+        for (auto &person:listOfPersonByGroup){
+            output<< person.getFirstName()<<" ";
+            output<< person.getLastName()<<" ";
+            if (i%2==0){ 
+                if (i==listOfPersonByGroup.size()-1) output<<"and ";
+                else output<<std::endl;
+            }
+            if ((i%2==1) && (i!=listOfPersonByGroup.size())) output<<"meets ";
+            i++;
+        }
+    }
+    else std::cout << "Error opening "<<outputFile;
+}
 
 
 int main()
 {
-    std::string namesListFile="NamesList.txt";
-    std::string answersFile="AnswersList.txt";
+    //File names
+    std::string namesListFile="NamesList.txt";  //Optional file with names (first and last) and a row of numbers of persons already met (history)
+    std::string participantsFile="ParticipantsList.txt"; //Obligatory file with names (first and last) and a boolean value, which is true if the person wants to participate
+    std::string outputFile="GroupList.txt";  //Output files with the groups of persons
+    //Read files
     std::vector<Person> listOfPersons=readNamesListFile(namesListFile);
-    listOfPersons=readAnswersFile(answersFile,listOfPersons);
+    listOfPersons=readParticipantsFile(participantsFile,listOfPersons);
+    //Generate groups
     std::vector<Person> listOfPersonByGroup=generateGroup(listOfPersons);
+    //Write files
+    writeNamesListFile(namesListFile, listOfPersons);
+    writeOutputFile(outputFile, listOfPersonByGroup);
+    return 0;
 }
-
-
-
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
