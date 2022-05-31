@@ -140,11 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CoffeeRoulette.cpp" />
-    <ClCompile Include="ListOfPersons.cpp" />
     <ClCompile Include="Person.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h" />
     <ClInclude Include="Person.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

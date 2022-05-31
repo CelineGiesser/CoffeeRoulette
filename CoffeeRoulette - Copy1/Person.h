@@ -2,14 +2,11 @@
 
 #include <string>
 #include <vector>
-#include <fstream>
-#include <sstream>
 
 class Person {
 public:
     //Constructor, destructor, copy and move constructor and assignement
-    Person();
-	Person(int personNb, std::string firstName, std::string lastName); //, std::vector<Person> pastCoffees);
+	Person(std::string firstName, std::string lastName); //, std::vector<Person> pastCoffees);
     ~Person();
     Person(const Person &source);
     Person &operator=(const Person &source);
@@ -19,19 +16,17 @@ public:
     //Setter and getter
     void setPastCoffeesNb(std::vector<int> &&pastCoffeesNb);
     void setParticipate(bool participate);
-    void addPastCoffeesNb(int number);
-    int getNumber() const;
     std::string getFirstName() const;
     std::string getLastName() const;
     std::vector<int> getPastCoffeesNb();
     bool getParticipate() const;
 
-    //friend std::istringstream &operator>>(std::istringstream& is, Person person);
+    //Vector of nb representing the persons already met
+   std::vector<int> m_pastCoffeesNb; 
         
 private:
-    int m_personNb;
     std::string m_firstName;
     std::string m_lastName;
-    std::vector<int> m_pastCoffeesNb;
+    //std::vector<int> m_pastCoffeesNb;
     bool m_participate=false;
 };

@@ -1,0 +1,20 @@
+Andre Ampere
+Amedeo Avogadro
+Niels Bohr
+Robert Brown
+Anders Celsius
+Nicolas Copernic 2 3 4
+Coulomb Charles
+Marie Curie
+Paul Dirac
+Albert Einstein
+Galilei Galilee
+Carl Gauss
+James Joule 5 6
+Pierre Laplace
+James Maxwell
+Isaac Newton
+Georg Ohm
+Max Planck
+Erwin Schroedinger
+Nikola Tesla
