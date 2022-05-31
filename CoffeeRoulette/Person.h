@@ -15,18 +15,18 @@ public:
 
     //Setter and getter
     void setPastCoffeesNb(std::vector<int> &&pastCoffeesNb);
-    void setParticipate(bool &participate);
-    const std::string getFirstName();
-    const std::string getLastName();
-    //const std::vector<int> getPastCoffeesNb();
-    const bool getParticipate();
+    void setParticipate(bool participate);
+    std::string getFirstName() const;
+    std::string getLastName() const;
+    std::vector<int> getPastCoffeesNb();
+    bool getParticipate() const;
 
     //Vector of nb representing the persons already met
-    std::vector<int> m_pastCoffeesNb; 
+   std::vector<int> m_pastCoffeesNb; 
         
 private:
-    std::string m_firstName="";
-    std::string m_lastName="";
+    std::string m_firstName;
+    std::string m_lastName;
     //std::vector<int> m_pastCoffeesNb;
     bool m_participate=false;
 };

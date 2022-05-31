@@ -37,9 +37,9 @@ Person &Person::operator=(Person &&source){
 //Setter and getter
 void Person::setPastCoffeesNb(std::vector<int> &&pastCoffeesNb){
     m_pastCoffeesNb=std::move(pastCoffeesNb);};
-void Person::setParticipate(bool &participate){
+void Person::setParticipate(bool participate){
     m_participate=participate;};
-const std::string Person::getFirstName() {return m_firstName;};
-const std::string Person::getLastName() {return m_lastName;};
+std::string Person::getFirstName() const {return m_firstName;};
+std::string Person::getLastName() const {return m_lastName;};
 //std::vector<int> getPastCoffeesNb(){return m_pastCoffeesNb;}
-const bool Person::getParticipate(){return m_participate;};
+bool Person::getParticipate() const {return m_participate;};

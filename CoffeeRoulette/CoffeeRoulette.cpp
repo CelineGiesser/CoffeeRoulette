@@ -35,7 +35,7 @@ std::vector<Person> readNamesListFile(const std::string namesListFile){
 
 //Read names (first and last) and a boolean value, which is true if the person wants to participate
 //This file is obligatory
-std::vector<Person> readParticipantsFile(const std::string &participantsFile, std::vector<Person> &listOfPersons){
+void readParticipantsFile(const std::string &participantsFile, std::vector<Person> &listOfPersons){
     std::ifstream input(participantsFile);
     std::vector<Person> listOfAnswers{};
     if (input.is_open()){
@@ -44,7 +44,7 @@ std::vector<Person> readParticipantsFile(const std::string &participantsFile, st
             std::istringstream linestream(line);
             std::string firstName,lastName,partiStr;
             linestream >> firstName >> lastName >> partiStr;
-            bool participate=(partiStr=="true") ? true: false;
+            bool participate=partiStr=="true";
             bool inList=false;
             for (auto &person : listOfPersons){
                 if ((person.getFirstName()==firstName)&&(person.getLastName()==lastName)){
@@ -53,14 +53,13 @@ std::vector<Person> readParticipantsFile(const std::string &participantsFile, st
                     break;
                 }
             }
-            if (inList==false){
+            if (!inList){
                 Person person(firstName,lastName);
                 person.setParticipate(participate);
                 listOfPersons.emplace_back(std::move(person));}
         }
     }
     else std::cout << "Cannot open file: "<<participantsFile<< ", error "<<std::endl;
-    return listOfPersons;
 };
 
 //Generates a random number between 1 and max
@@ -185,7 +184,7 @@ int main()
     std::string outputFile="GroupList.txt";  //Output files with the groups of persons
     //Read files
     std::vector<Person> listOfPersons=readNamesListFile(namesListFile);
-    listOfPersons=readParticipantsFile(participantsFile,listOfPersons);
+    readParticipantsFile(participantsFile,listOfPersons);
     //Generate groups
     std::vector<Person> listOfPersonByGroup=generateGroup(listOfPersons);
     //Write files
