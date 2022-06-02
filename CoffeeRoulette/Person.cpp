@@ -7,6 +7,11 @@
 
 //Constructor, destructor, copy and move constructor and assignement op.
 Person::Person(){}
+Person::Person(std::istringstream &linestream){
+    linestream >> m_personNb >> m_firstName >> m_lastName;
+    int number;
+    while (linestream >> number){
+        m_pastCoffeesNb.emplace_back(number);}}
 Person::Person(int personNb, std::string firstName, std::string lastName)//, std::vector<Person> pastCoffees)
     : m_personNb(personNb), m_firstName(firstName), m_lastName(lastName) {
     m_pastCoffeesNb={};} //, m_pastCoffees(pastCoffees) {}
@@ -54,7 +59,16 @@ std::string Person::getFirstName() const {return m_firstName;};
 std::string Person::getLastName() const {return m_lastName;};
 std::vector<int> Person::getPastCoffeesNb(){return m_pastCoffeesNb;}
 bool Person::getParticipate() const {return m_participate;};
-
-/*std::istringstream &operator>>(std::istringstream& is, Person person){
-    is >> person.m_personNb >> person.m_firstName >> person.m_lastName;
-    return is;};*/
+bool Person::compareNames(std::string& firstName,std::string& lastName){
+    if ((m_firstName==firstName)&&(m_lastName==lastName)){
+        return true;}
+    else return false;
+};
+void Person::outputAll(std::ofstream &output, int nMax){
+    output<< m_personNb <<" ";
+    output<< m_firstName <<" ";
+    output<< m_lastName <<" ";
+    for(int i=0; i<nMax;i++){
+         output<<m_pastCoffeesNb.at(i)<<" ";};
+    output<<std::endl;
+}

@@ -9,6 +9,7 @@ class Person {
 public:
     //Constructor, destructor, copy and move constructor and assignement
     Person();
+    Person(std::istringstream &linestream);
 	Person(int personNb, std::string firstName, std::string lastName); //, std::vector<Person> pastCoffees);
     ~Person();
     Person(const Person &source);
@@ -25,9 +26,9 @@ public:
     std::string getLastName() const;
     std::vector<int> getPastCoffeesNb();
     bool getParticipate() const;
-
-    //friend std::istringstream &operator>>(std::istringstream& is, Person person);
-        
+    bool compareNames(std::string& firstName,std::string& lastName);
+    void outputAll(std::ofstream &output, int nMax);
+    
 private:
     int m_personNb;
     std::string m_firstName;

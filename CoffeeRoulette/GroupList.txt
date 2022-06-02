@@ -1,8 +1,8 @@
-Marie Curie meets James Maxwell 
-Amedeo Avogadro meets Niels Bohr 
-Pierre Laplace meets Jonathan ALLEMAND 
-Andre Ampere meets Simon MARK 
-Bartosz KACZMAREK meets Valentina ALBANO 
-Michael BRANDT meets Robert Brown 
-Michael DIETSCHI meets Anders Celsius 
-Tatiana SAVCHENKO meets Galilei Galilee 
+Valentina ALBANO meets Tatiana SAVCHENKO 
+Anders Celsius meets Niels Bohr 
+Galilei Galilee meets Andre Ampere 
+Simon MARK meets Marie Curie 
+Amedeo Avogadro meets Michael DIETSCHI 
+Robert Brown meets James Maxwell 
+Pierre Laplace meets Bartosz KACZMAREK 
+Michael BRANDT meets Jonathan ALLEMAND 

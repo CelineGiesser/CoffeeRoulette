@@ -1,23 +1,23 @@
-1 Valentina ALBANO 4 1 
-2 Bartosz KACZMAREK 11 0 
-3 Simon MARK 17 10 
+1 Valentina ALBANO 12 21 10 7 
+2 Bartosz KACZMAREK 17 2 12 21 
+3 Simon MARK 10 1 6 17 
 4 Saif BUTT 
-5 Michael DIETSCHI 0 14 
+5 Michael DIETSCHI 6 17 22 11 
 6 Bianka HAY-FALK 
-7 Jonathan ALLEMAND 10 21 
-8 Tatiana SAVCHENKO 22 20 
+7 Jonathan ALLEMAND 4 14 2 9 
+8 Tatiana SAVCHENKO 9 13 9 17 0 
 9 Michel BUCHS 
-10 Michael BRANDT 14 13 
-11 Andre Ampere 6 2 
-12 Amedeo Avogadro 1 12 
-13 Niels Bohr 13 11 
-14 Robert Brown 12 9 
-15 Anders Celsius 9 4 
+10 Michael BRANDT 7 13 7 11 6 
+11 Andre Ampere 2 13 0 20 
+12 Amedeo Avogadro 14 22 9 4 
+13 Niels Bohr 0 20 1 14 
+14 Robert Brown 9 7 10 20 22 
+15 Anders Celsius 11 6 21 12 
 16 Nicolas Copernic 
 17 Charles Coulomb 
-18 Marie Curie 2 22 
+18 Marie Curie 1 4 7 2 
 19 Paul Dirac 
 20 Albert Einstein 
-21 Galilei Galilee 21 7 
-22 Pierre Laplace 20 6 
-23 James Maxwell 7 17 
+21 Galilei Galilee 12 13 10 
+22 Pierre Laplace 0 14 1 
+23 James Maxwell 11 4 13 
