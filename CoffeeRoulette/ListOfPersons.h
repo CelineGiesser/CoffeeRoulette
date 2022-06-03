@@ -24,7 +24,7 @@ public:
     void readParticipantsFile(const std::string &participantsFile);
     ListOfPersons generateGroup();
     void writeNamesListFile(const std::string namesListFile);
-    void writeOutputFile(const std::string &outputFile);
+    void writeGroupsFile(const std::string &outputFile);
         
 private:
     std::vector<Person> m_listOfPersons;

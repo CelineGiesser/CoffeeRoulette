@@ -112,7 +112,7 @@ ListOfPersons ListOfPersons::generateGroup(){
         //erase the person from the list and add him in the listOfPersonByGroup
         int j=(int)generateRandom(personsParticipatingNb.size())-1;
         int iFirstPerson= personsParticipatingNb.at(j);
-        std::cout<<"Choosen person nb: "<<m_listOfPersons.at(std::size_t(iFirstPerson)).getFirstName()<<" ("<<iFirstPerson<<")"<<std::endl;
+        //std::cout<<"Choosen person nb: "<<m_listOfPersons.at(std::size_t(iFirstPerson)).getFirstName()<<" ("<<iFirstPerson<<")"<<std::endl;
         listOfPersonByGroup.addPerson(m_listOfPersons.at(std::size_t(iFirstPerson)));
         personsParticipatingNb.erase(personsParticipatingNb.begin()+j);
 
@@ -120,9 +120,9 @@ ListOfPersons ListOfPersons::generateGroup(){
         std::vector<int> personsNotMet(personsParticipatingNb);
         bool foundOldestMet=false;
         int iOldestMet; //in case all persons have been met, the "oldest" met is saved
-        std::cout<<"Already met : ";
+        //std::cout<<"Already met : ";
         for (int iMet:m_listOfPersons.at(std::size_t(iFirstPerson)).getPastCoffeesNb()){
-            std::cout <<" "<<m_listOfPersons.at(std::size_t(iMet)).getFirstName()<<" ("<<iMet<<")"<<", ";
+            //std::cout <<" "<<m_listOfPersons.at(std::size_t(iMet)).getFirstName()<<" ("<<iMet<<")"<<", ";
             std::vector<int>::iterator it;
             it = std::find(personsNotMet.begin(),personsNotMet.end(), iMet);
             if (it != personsNotMet.end()){ 
@@ -133,7 +133,7 @@ ListOfPersons ListOfPersons::generateGroup(){
                 personsNotMet.erase(it);
             }
         }
-        std::cout<<std::endl;
+        //std::cout<<std::endl;
 
         //Choose randomly a person in the list of persons not met (if not empty)
         int iSecondPerson;
@@ -185,7 +185,7 @@ void ListOfPersons::writeNamesListFile(const std::string namesListFile){
 };
 
 //Write the groups of persons
-void ListOfPersons::writeOutputFile(const std::string &outputFile){
+void ListOfPersons::writeGroupsFile(const std::string &outputFile){
     std::ofstream output(outputFile);
     if (!output.is_open()) std::cout << "Error opening "<<outputFile;
     else{
