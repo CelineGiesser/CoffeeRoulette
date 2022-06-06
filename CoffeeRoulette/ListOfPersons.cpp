@@ -13,7 +13,7 @@ ListOfPersons::ListOfPersons(){}
 ListOfPersons::ListOfPersons(const std::string &namesListFile,const std::string &participantsFile){
     ListOfPersons::readNamesListFile(namesListFile);
     ListOfPersons::readParticipantsFile(participantsFile);}
-ListOfPersons::~ListOfPersons(){}
+ListOfPersons::~ListOfPersons(){m_listOfPersons.clear();}
 ListOfPersons::ListOfPersons(const ListOfPersons &source){
 m_listOfPersons=source.m_listOfPersons;}
 ListOfPersons &ListOfPersons::operator=(const ListOfPersons &source){
@@ -177,9 +177,8 @@ void ListOfPersons::writeNamesListFile(const std::string namesListFile){
     if (!output.is_open()) std::cout << "Error opening "<<namesListFile;
     else{
         for (auto &person:m_listOfPersons){
-            int nMax=person.getPastCoffeesNb().size();
-            if (nMax>(m_listOfPersons.size()*0.8)) nMax=3;
-            person.outputAll(output, nMax);
+            int nMaxHistory=m_listOfPersons.size()*0.8; // Define the max length of the history (persons already met)
+            person.outputAll(output, nMaxHistory); // If the number of persons met is above nMaxHistory, only keep the three last.
         }
     }
 };

@@ -15,7 +15,7 @@ Person::Person(std::istringstream &linestream){
 Person::Person(int personNb, std::string firstName, std::string lastName)//, std::vector<Person> pastCoffees)
     : m_personNb(personNb), m_firstName(firstName), m_lastName(lastName) {
     m_pastCoffeesNb={};} //, m_pastCoffees(pastCoffees) {}
-Person::~Person(){}
+Person::~Person(){m_pastCoffeesNb.clear();}
 Person::Person(const Person &source){
     m_personNb=source.m_personNb;
     m_firstName=source.m_firstName; 
@@ -64,11 +64,22 @@ bool Person::compareNames(std::string& firstName,std::string& lastName){
         return true;}
     else return false;
 };
-void Person::outputAll(std::ofstream &output, int nMax){
+
+//Output the number, names and a list of numbers of persons already met.
+//The length of list is limited by nMaxHistory to avoid that the persons meet 
+//in the same row (given by the list) once they have met all the persons.
+void Person::outputAll(std::ofstream &output, const int &nMaxHistory){
     output<< m_personNb <<" ";
     output<< m_firstName <<" ";
     output<< m_lastName <<" ";
-    for(int i=0; i<nMax;i++){
-         output<<m_pastCoffeesNb.at(i)<<" ";};
+    int nPastCoffees=m_pastCoffeesNb.size();
+    if (nPastCoffees<nMaxHistory){
+        for(int i=0; i<nPastCoffees;i++){
+            output<<m_pastCoffeesNb.at(i)<<" ";};
+    }
+    else{
+        for(int i=(nPastCoffees-3); i<nPastCoffees;i++){
+            output<<m_pastCoffeesNb.at(i)<<" ";};
+    }
     output<<std::endl;
 }

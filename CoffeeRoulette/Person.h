@@ -27,7 +27,7 @@ public:
     std::vector<int> getPastCoffeesNb();
     bool getParticipate() const;
     bool compareNames(std::string& firstName,std::string& lastName);
-    void outputAll(std::ofstream &output, int nMax);
+    void outputAll(std::ofstream &output, const int &nMaxHistory);
     
 private:
     int m_personNb;
