@@ -1,0 +1,20 @@
+1 Andre AMPERE 5 1 
+2 Amedeo AVOGADRO 5 0 
+3 Niels BOHR 13 
+4 Robert BROWN 9 
+5 Anders CELSIUS 14 
+6 Nicolas COPERNIC 0 1 
+7 Charles COULOMB 
+8 Marie CURIE 16 
+9 Paul DIRAC 
+10 Albert EINSTEIN 3 
+11 Galilei GALILEE 19 
+12 Carl GAUSS 
+13 James JOULE 
+14 Pierre LAPLACE 2 
+15 James MAXWELL 4 
+16 Isaac NEWTON 
+17 Georg OHM 7 
+18 Max PLANCK 18 
+19 Nikola TESLA 17 
+20 Louis PASTEUR 10 
