@@ -8,18 +8,19 @@
 //Constructor, destructor, copy and move constructor and assignement op.
 Person::Person(){}
 Person::Person(std::istringstream &linestream){
-    linestream >> m_personNb >> m_firstName >> m_lastName;
+    linestream >> m_personNb >> m_firstName >> m_lastName >> m_email;
     int number;
     while (linestream >> number){
         m_pastCoffeesNb.emplace_back(number);}}
-Person::Person(int personNb, std::string firstName, std::string lastName)//, std::vector<Person> pastCoffees)
-    : m_personNb(personNb), m_firstName(firstName), m_lastName(lastName) {
+Person::Person(int personNb, std::string firstName, std::string lastName,std::string email)//, std::vector<Person> pastCoffees)
+    : m_personNb(personNb), m_firstName(firstName), m_lastName(lastName), m_email(email) {
     m_pastCoffeesNb={};} //, m_pastCoffees(pastCoffees) {}
-Person::~Person(){}
+Person::~Person(){m_pastCoffeesNb.clear();}
 Person::Person(const Person &source){
     m_personNb=source.m_personNb;
     m_firstName=source.m_firstName; 
     m_lastName=source.m_lastName;
+    m_email=source.m_email;
     m_pastCoffeesNb=source.m_pastCoffeesNb;
     m_participate=source.m_participate;}
 Person &Person::operator=(const Person &source){
@@ -28,12 +29,14 @@ Person &Person::operator=(const Person &source){
     m_personNb=source.m_personNb;
     m_firstName=source.m_firstName;
     m_lastName=source.m_lastName;
+    m_email=source.m_email;
     m_pastCoffeesNb=source.m_pastCoffeesNb;
     m_participate=source.m_participate;}
 Person::Person(Person &&source){
     m_personNb=source.m_personNb;
     m_firstName=source.m_firstName; 
     m_lastName=source.m_lastName;
+    m_email=source.m_email;
     m_pastCoffeesNb=source.m_pastCoffeesNb;
     m_participate=source.m_participate;
     source.m_pastCoffeesNb.clear();}
@@ -43,6 +46,7 @@ Person &Person::operator=(Person &&source){
     m_personNb=source.m_personNb;
     m_firstName=source.m_firstName; 
     m_lastName=source.m_lastName;
+    m_email=source.m_email;
     m_pastCoffeesNb=source.m_pastCoffeesNb;
     m_participate=source.m_participate;
     source.m_pastCoffeesNb.clear();}
@@ -57,6 +61,7 @@ void Person::addPastCoffeesNb(int number){
 int Person::getNumber() const {return m_personNb;};
 std::string Person::getFirstName() const {return m_firstName;};
 std::string Person::getLastName() const {return m_lastName;};
+std::string Person::getEmail() const {return m_email;};
 std::vector<int> Person::getPastCoffeesNb(){return m_pastCoffeesNb;}
 bool Person::getParticipate() const {return m_participate;};
 bool Person::compareNames(std::string& firstName,std::string& lastName){
@@ -64,11 +69,23 @@ bool Person::compareNames(std::string& firstName,std::string& lastName){
         return true;}
     else return false;
 };
-void Person::outputAll(std::ofstream &output, int nMax){
+
+//Output the number, names and a list of numbers of persons already met.
+//The length of list is limited by nMaxHistory to avoid that the persons meet 
+//in the same row (given by the list) once they have met all the persons.
+void Person::outputAll(std::ofstream &output, const int &nMaxHistory){
     output<< m_personNb <<" ";
     output<< m_firstName <<" ";
     output<< m_lastName <<" ";
-    for(int i=0; i<nMax;i++){
-         output<<m_pastCoffeesNb.at(i)<<" ";};
+    output<< m_email <<" ";
+    int nPastCoffees=m_pastCoffeesNb.size();
+    if (nPastCoffees<nMaxHistory){
+        for(int i=0; i<nPastCoffees;i++){
+            output<<m_pastCoffeesNb.at(i)<<" ";};
+    }
+    else{
+        for(int i=(nPastCoffees-3); i<nPastCoffees;i++){
+            output<<m_pastCoffeesNb.at(i)<<" ";};
+    }
     output<<std::endl;
 }

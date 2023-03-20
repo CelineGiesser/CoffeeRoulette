@@ -1,8 +1,4 @@
-Valentina ALBANO meets Tatiana SAVCHENKO 
-Anders Celsius meets Niels Bohr 
-Galilei Galilee meets Andre Ampere 
-Simon MARK meets Marie Curie 
-Amedeo Avogadro meets Michael DIETSCHI 
-Robert Brown meets James Maxwell 
-Pierre Laplace meets Bartosz KACZMAREK 
-Michael BRANDT meets Jonathan ALLEMAND 
+Bartosz KACZMAREK <bartosz.kaczmarek@leica-geosystems.com> ; Joao HENRIQUES <joao.reis@leica-geosystems.com> 
+Marcoen HIRSCHBERG <marcoen.hirschberg-ext@leica-geosystems.com> ; Tatiana SAVCHENKO <tatiana.savchenko@leica-geosystems.com> 
+Klaus BEREUTER <klaus.bereuter@leica-geosystems.com> ; Martina KOLLAROVA <martina.kollarova@leica-geosystems.com> 
+Bianka HAY <bianka.hay@hexagon.com> ; Lukas HEINZLE <lukas.heinzle@hexagon.com> ; Jon ALLEMAND <jonathan.allemand@leica-geosystems.com> 

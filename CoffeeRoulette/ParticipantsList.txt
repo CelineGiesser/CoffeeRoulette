@@ -1,22 +1,31 @@
-Andre Ampere true
-Amedeo Avogadro true
-Niels Bohr true
-Robert Brown true
-Anders Celsius true
-Nicolas Copernic false
-Coulomb Charles false
-Marie Curie true
-Paul Dirac false
-Albert Einstein false
-Galilei Galilee true
-Carl Gauss true
-James Joule true
-Pierre Laplace true
-James Maxwell true
-Isaac Newton false
-Georg Ohm false
-Max Planck true
-Erwin Schroedinger true
-Nikola Tesla false
-Louis Pasteur true
-Archimede Syracuse true
+From;Subject;Received;Size;Categories
+ALBANO Valentina;Yes: CoffeeV roulette KW49;Mi. 12:08;26 KB;
+KACZMAREK Bartosz;Yes: CoffeeB roulette KW49;Mi. 11:26;26 KB;
+MARK Simon;Yes: CoffeeS roulette KW49;Mi. 11:11;36 KB;
+BUTT Saif;Yes: CoffeeS roulette KW49;Mi. 11:05;26 KB;
+DIETSCHI Michael;Yes: CoffeeM roulette KW49;Mi. 10:58;26 KB;
+HAY-FALK Bianka;Yes: CoffeeB roulette KW49;Mi. 10:58;29 KB;
+ALLEMAND Jonathan;Yes: CoffeeJ roulette KW49;Mi. 10:58;26 KB;
+SAVCHENKO Tatiana;Yes: CoffeeT roulette KW49;Mi. 10:58;26 KB;
+BUCHS Michel;Yes: Coffee roulette KW49;Mi. 10:57;26 KB;
+BRANDT Michael;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+AMPERE Andre;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+AVOGADRO Amedeo;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+BOHR Niels;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+BROWN Robert;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+CELSIUS Anders;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+COPERNIC Nicolas;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+COULOMB Charles;No: Coffee roulette KW49;Mi. 10:57;29 KB;
+CURIE Marie;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+DIRAC Paul;No: Coffee roulette KW49;Mi. 10:57;29 KB;
+EINSTEIN Albert;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+GALILEE Galilei;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+GAUSS Carl;No: Coffee roulette KW49;Mi. 10:57;29 KB;
+JOULE James;No: Coffee roulette KW49;Mi. 10:57;29 KB;
+LAPLACE Pierre;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+MAXWELL James;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+NEWTON Isaac;No: Coffee roulette KW49;Mi. 10:57;29 KB;
+OHM Georg;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+PLANCK Max;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+TESLA Nikola;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+PASTEUR Louis;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;

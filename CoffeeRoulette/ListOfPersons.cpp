@@ -13,7 +13,7 @@ ListOfPersons::ListOfPersons(){}
 ListOfPersons::ListOfPersons(const std::string &namesListFile,const std::string &participantsFile){
     ListOfPersons::readNamesListFile(namesListFile);
     ListOfPersons::readParticipantsFile(participantsFile);}
-ListOfPersons::~ListOfPersons(){}
+ListOfPersons::~ListOfPersons(){m_listOfPersons.clear();}
 ListOfPersons::ListOfPersons(const ListOfPersons &source){
 m_listOfPersons=source.m_listOfPersons;}
 ListOfPersons &ListOfPersons::operator=(const ListOfPersons &source){
@@ -60,11 +60,23 @@ void ListOfPersons::readParticipantsFile(const std::string &participantsFile){
         int personNb= (m_listOfPersons.size()>0)? (m_listOfPersons.back().getNumber()+1):1;
         getline(input,line);
         while(getline(input,line)){
-            std::replace(line.begin(), line.end(), ';', ' ');
             std::istringstream linestream(line);
-            std::string firstName,lastName,partiStr;
-            linestream >> lastName >> firstName >> partiStr;
-            bool participate=partiStr=="Yes:";
+            std::string lineStart;
+            std::string firstName,lastName, email;
+            bool participate=false;
+            linestream >> lineStart;
+            if (lineStart=="From:"){
+                linestream >> lastName >> firstName;
+                while (isupper(firstName[1])){  //for case with several lastNames
+                    linestream >> firstName;
+                } 
+                linestream >> email;
+                while (isupper(email[0])){    //for case with several firstNames
+                    linestream >> email;
+                }
+                participate=true;
+            }else{
+                continue;}
             bool inList=false;
             for (auto &person : m_listOfPersons){
                 if (person.compareNames(firstName,lastName)){
@@ -74,8 +86,9 @@ void ListOfPersons::readParticipantsFile(const std::string &participantsFile){
                 }
             }
             //If the person is not in listOfPersons, he is added at the end
+            //std::cout<<personNb<<firstName<<std::endl;
             if (!inList){
-                Person person(personNb,firstName,lastName);
+                Person person(personNb,firstName,lastName,email);
                 person.setParticipate(participate);
                 m_listOfPersons.emplace_back(std::move(person));
                 personNb++;}
@@ -112,7 +125,7 @@ ListOfPersons ListOfPersons::generateGroup(){
         //erase the person from the list and add him in the listOfPersonByGroup
         int j=(int)generateRandom(personsParticipatingNb.size())-1;
         int iFirstPerson= personsParticipatingNb.at(j);
-        std::cout<<"Choosen person nb: "<<m_listOfPersons.at(std::size_t(iFirstPerson)).getFirstName()<<" ("<<iFirstPerson<<")"<<std::endl;
+        //std::cout<<"Choosen person nb: "<<m_listOfPersons.at(std::size_t(iFirstPerson)).getFirstName()<<" ("<<iFirstPerson<<")"<<std::endl;
         listOfPersonByGroup.addPerson(m_listOfPersons.at(std::size_t(iFirstPerson)));
         personsParticipatingNb.erase(personsParticipatingNb.begin()+j);
 
@@ -120,9 +133,9 @@ ListOfPersons ListOfPersons::generateGroup(){
         std::vector<int> personsNotMet(personsParticipatingNb);
         bool foundOldestMet=false;
         int iOldestMet; //in case all persons have been met, the "oldest" met is saved
-        std::cout<<"Already met : ";
+        //std::cout<<"Already met : ";
         for (int iMet:m_listOfPersons.at(std::size_t(iFirstPerson)).getPastCoffeesNb()){
-            std::cout <<" "<<m_listOfPersons.at(std::size_t(iMet)).getFirstName()<<" ("<<iMet<<")"<<", ";
+            //std::cout <<" "<<m_listOfPersons.at(std::size_t(iMet)).getFirstName()<<" ("<<iMet<<")"<<", ";
             std::vector<int>::iterator it;
             it = std::find(personsNotMet.begin(),personsNotMet.end(), iMet);
             if (it != personsNotMet.end()){ 
@@ -133,7 +146,7 @@ ListOfPersons ListOfPersons::generateGroup(){
                 personsNotMet.erase(it);
             }
         }
-        std::cout<<std::endl;
+        //std::cout<<std::endl;
 
         //Choose randomly a person in the list of persons not met (if not empty)
         int iSecondPerson;
@@ -177,27 +190,27 @@ void ListOfPersons::writeNamesListFile(const std::string namesListFile){
     if (!output.is_open()) std::cout << "Error opening "<<namesListFile;
     else{
         for (auto &person:m_listOfPersons){
-            int nMax=person.getPastCoffeesNb().size();
-            if (nMax>(m_listOfPersons.size()*0.8)) nMax=3;
-            person.outputAll(output, nMax);
+            int nMaxHistory=m_listOfPersons.size()*0.8; // Define the max length of the history (persons already met)
+            person.outputAll(output, nMaxHistory); // If the number of persons met is above nMaxHistory, only keep the three last.
         }
     }
 };
 
 //Write the groups of persons
-void ListOfPersons::writeOutputFile(const std::string &outputFile){
+void ListOfPersons::writeGroupsFile(const std::string &outputFile){
     std::ofstream output(outputFile);
     if (!output.is_open()) std::cout << "Error opening "<<outputFile;
     else{
-        int i=1;
+        int i=1;;
         for (auto &person:m_listOfPersons){
             output<< person.getFirstName()<<" ";
             output<< person.getLastName()<<" ";
+            output<<person.getEmail()<<" ";
             if (i%2==0){ 
-                if (i==m_listOfPersons.size()-1) output<<"and ";
+                if (i==m_listOfPersons.size()-1) output<<"; ";
                 else output<<std::endl;
             }
-            if ((i%2==1) && (i!=m_listOfPersons.size())) output<<"meets ";
+            if ((i%2==1) && (i!=m_listOfPersons.size())) output<<"; ";
             i++;
         }
     }
