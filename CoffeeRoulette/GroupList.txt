@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 Bartosz KACZMAREK <bartosz.kaczmarek@leica-geosystems.com> ; Joao HENRIQUES <joao.reis@leica-geosystems.com> 
 Marcoen HIRSCHBERG <marcoen.hirschberg-ext@leica-geosystems.com> ; Tatiana SAVCHENKO <tatiana.savchenko@leica-geosystems.com> 
 Klaus BEREUTER <klaus.bereuter@leica-geosystems.com> ; Martina KOLLAROVA <martina.kollarova@leica-geosystems.com> 
 Bianka HAY <bianka.hay@hexagon.com> ; Lukas HEINZLE <lukas.heinzle@hexagon.com> ; Jon ALLEMAND <jonathan.allemand@leica-geosystems.com> 
+=======
+Georg OHM meets Marie CURIE 
+James MAXWELL meets Anders CELSIUS 
+Nikola TESLA meets Max PLANCK 
+Niels BOHR meets Pierre LAPLACE 
+Galilei GALILEE meets Louis PASTEUR 
+Robert BROWN meets Albert EINSTEIN 
+Nicolas COPERNIC meets Andre AMPERE and Amedeo AVOGADRO 
+>>>>>>> 451b0d57d518958c6cb958a0a7fb098dace153a1

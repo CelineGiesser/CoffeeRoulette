@@ -1,4 +1,5 @@
 From;Subject;Received;Size;Categories
+<<<<<<< HEAD
 ALBANO Valentina;Yes: CoffeeV roulette KW49;Mi. 12:08;26 KB;
 KACZMAREK Bartosz;Yes: CoffeeB roulette KW49;Mi. 11:26;26 KB;
 MARK Simon;Yes: CoffeeS roulette KW49;Mi. 11:11;36 KB;
@@ -9,6 +10,8 @@ ALLEMAND Jonathan;Yes: CoffeeJ roulette KW49;Mi. 10:58;26 KB;
 SAVCHENKO Tatiana;Yes: CoffeeT roulette KW49;Mi. 10:58;26 KB;
 BUCHS Michel;Yes: Coffee roulette KW49;Mi. 10:57;26 KB;
 BRANDT Michael;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
+=======
+>>>>>>> 451b0d57d518958c6cb958a0a7fb098dace153a1
 AMPERE Andre;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
 AVOGADRO Amedeo;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;
 BOHR Niels;Yes: Coffee roulette KW49;Mi. 10:57;29 KB;

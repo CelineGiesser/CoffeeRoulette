@@ -77,7 +77,10 @@ void Person::outputAll(std::ofstream &output, const int &nMaxHistory){
     output<< m_personNb <<" ";
     output<< m_firstName <<" ";
     output<< m_lastName <<" ";
+<<<<<<< HEAD
     output<< m_email <<" ";
+=======
+>>>>>>> 451b0d57d518958c6cb958a0a7fb098dace153a1
     int nPastCoffees=m_pastCoffeesNb.size();
     if (nPastCoffees<nMaxHistory){
         for(int i=0; i<nPastCoffees;i++){
